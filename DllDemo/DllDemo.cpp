@@ -39,8 +39,8 @@ typedef bool(*calcPerimeter)(void *, int , int , int& );
 	cv::imshow("", output.imgDisplayRect);
 	cv::waitKey(-1);
 #endif
-
-	getchar();
+	system("pause");
+	//getchar();
     return 0;
 }
 
