@@ -9,7 +9,7 @@
 
 int main()
 {
-#if 0 动态调用DLL
+#if 1 动态调用DLL
 	//----------动态调用DLL（代码运行时期），只要找到目标DLL------------
 typedef bool (*createInstance)(void **);
 typedef bool(*releaseInstance)(void *);
