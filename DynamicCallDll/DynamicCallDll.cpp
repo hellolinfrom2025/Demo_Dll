@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <iostream>
 #include <assert.h>
+#include <functional>
 
 int TestDllOfC();
 int TestDllOfCpp();
@@ -47,13 +48,16 @@ int TestDllOfC()
 		}
 		return 1;
 	}
-	typedef uint32_t(__stdcall *FnPointAddPoint)(const Point2d, const Point2d, Point2d*);
-	FnPointAddPoint Point2DAddPoint2D = static_cast<FnPointAddPoint>(pPointAddPoint);
+	typedef std::function<uint32_t(__stdcall)( const Point2d, const Point2d, Point2d* )> FnPointAddPoint;
+	typedef uint32_t(__stdcall *FnPointAddPoint1)(const Point2d, const Point2d, Point2d*);
+	FnPointAddPoint Point2DAddPoint2D =reinterpret_cast< FnPointAddPoint1 >(pPointAddPoint);
 	Point2d p1{ 1,2 };
 	Point2d p2{ 1.1,2.2 };
 	Point2d p3;
 	uint32_t  status = Point2DAddPoint2D(p1, p2, &p3);
 	printf("p3.x=%f,p3.y=%f\n", p3.x, p3.y);
+	printf("Point2DAddPoint2D:%16x,&Point2DAddPoint2D:%16x\n", Point2DAddPoint2D, &Point2DAddPoint2D);
+
 
 	FreeLibrary(hModule);
 	return 0;
