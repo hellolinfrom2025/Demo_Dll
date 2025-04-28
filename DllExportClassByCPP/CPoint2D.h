@@ -16,6 +16,7 @@ class DLL_API CPoint2D
 public:
 	CPoint2D();
 	~CPoint2D();
+	// Ä£Äâ¼ì²â
 	double Detect(const double x, const double y);
 };
 }
